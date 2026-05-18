@@ -1,396 +1,300 @@
-# Campus Hiring Evaluation - Frontend Track
+# Notification Dashboard Frontend
 
-Production-grade notification system with logging middleware, system design documentation, and full-stack implementation.
+Modern, responsive notification dashboard built with Next.js, React, TypeScript, and Material UI.
 
-## 📁 Project Structure
+## Features
 
-```
-project-root/
-│
-├── logging_middleware/          # Reusable logging middleware
-│   ├── src/
-│   │   └── index.ts
-│   ├── package.json
-│   ├── tsconfig.json
-│   └── README.md
-│
-├── notification_system_design.md  # System architecture documentation
-│
-├── notification_app_be/          # Backend REST API
-│   ├── src/
-│   │   ├── controllers/
-│   │   ├── services/
-│   │   ├── routes/
-│   │   ├── models/
-│   │   ├── middleware/
-│   │   └── index.ts
-│   ├── package.json
-│   ├── tsconfig.json
-│   └── README.md
-│
-├── notification_app_fe/          # Frontend Dashboard
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── services/
-│   │   ├── context/
-│   │   ├── types/
-│   │   └── styles/
-│   ├── public/
-│   ├── package.json
-│   ├── tsconfig.json
-│   └── README.md
-│
-└── .gitignore
-```
-
-## 🚀 Quick Start
-
-### Prerequisites
-
-- Node.js (v18 or higher)
-- npm or yarn
-
-### Installation
-
-1. **Clone the repository**
-```bash
-cd TAAI&DS17
-```
-
-2. **Install logging middleware**
-```bash
-cd logging_middleware
-npm install
-cd ..
-```
-
-3. **Install backend dependencies**
-```bash
-cd notification_app_be
-npm install
-cd ..
-```
-
-4. **Install frontend dependencies**
-```bash
-cd notification_app_fe
-npm install
-cd ..
-```
-
-### Running the Application
-
-#### 1. Start Backend Server
-```bash
-cd notification_app_be
-npm run dev
-```
-Backend will run on `http://localhost:5000`
-
-#### 2. Start Frontend Application
-```bash
-cd notification_app_fe
-npm run dev
-```
-Frontend will run on `http://localhost:3000`
-
-#### 3. Access the Application
-Open your browser and navigate to:
-```
-http://localhost:3000
-```
-
-## 📦 Components Overview
-
-### 1. Logging Middleware
-- Express middleware for request/response logging
-- Timestamps, status codes, response times
-- Console and file logging support
-- Error tracking
-- Color-coded output
-
-**Key Features:**
-- ✅ Zero dependencies (except Express)
-- ✅ TypeScript support
-- ✅ Configurable options
-- ✅ Production-ready
-
-### 2. System Design Document
-Comprehensive documentation covering:
-- System architecture
-- Priority notification logic
-- Frontend/Backend flow
-- Scalability strategies
-- Real-time handling
-- API design
-- Data structures
-- Complexity analysis
-- Error handling
-- Future improvements
-
-### 3. Backend API
-Node.js + Express + TypeScript REST API
-
-**Endpoints:**
-- `GET /api/notifications` - Paginated notifications
-- `GET /api/notifications/priority` - Top priority notifications
-- `GET /api/notifications/search` - Search notifications
-- `PATCH /api/notifications/:id/read` - Mark as read
-- `GET /health` - Health check
-
-**Features:**
-- ✅ MVC architecture
-- ✅ Pagination & filtering
-- ✅ Priority calculation
-- ✅ Error handling
-- ✅ CORS enabled
-- ✅ Request logging
-
-### 4. Frontend Dashboard
-Next.js + React + TypeScript + Material UI
-
-**Features:**
-- ✅ Responsive design
+- ✅ Responsive design (mobile + desktop)
 - ✅ Priority notifications section
-- ✅ Filtering & search
+- ✅ Notification filtering by type
+- ✅ Search functionality
 - ✅ Pagination
-- ✅ Dark/Light mode
-- ✅ Loading states
-- ✅ Error handling
-- ✅ Empty states
-- ✅ Zustand state management
+- ✅ Dark/Light mode toggle
+- ✅ Loading skeletons
+- ✅ Error handling UI
+- ✅ Empty state UI
+- ✅ Mark as read functionality
+- ✅ Real-time updates
+- ✅ TypeScript for type safety
+- ✅ Zustand for state management
 
-## 🎯 Key Features
+## Tech Stack
 
-### Priority Notification System
-Notifications are prioritized using:
-```
-Priority = (Type Weight × 0.4) + (Recency × 0.3) + (Unread × 0.3)
-
-Type Weights:
-- Placement: 3
-- Result: 2
-- Event: 1
-```
-
-### Notification Types
-- **Placement**: Job opportunities, interviews, placement drives
-- **Result**: Exam results, grades, evaluations
-- **Event**: Tech fests, lectures, hackathons
-
-### Filtering Options
-- Filter by type (Placement/Result/Event/All)
-- Show unread only
-- Search by message content
-- Pagination (10 items per page)
-
-## 🛠️ Technology Stack
-
-### Backend
-- **Runtime**: Node.js
-- **Framework**: Express.js
-- **Language**: TypeScript
-- **Architecture**: MVC Pattern
-
-### Frontend
 - **Framework**: Next.js 14
-- **UI Library**: Material UI
+- **UI Library**: Material UI (MUI)
 - **Language**: TypeScript
 - **State Management**: Zustand
 - **HTTP Client**: Axios
+- **Styling**: Emotion (CSS-in-JS)
 
-### Development Tools
-- TypeScript Compiler
-- ts-node for development
-- ESLint for code quality
+## Project Structure
 
-## 📖 API Documentation
-
-### Get Notifications
-```http
-GET /api/notifications?page=1&limit=10&type=Placement
+```
+notification_app_fe/
+├── src/
+│   ├── components/          # Reusable components
+│   │   ├── Navbar.tsx
+│   │   ├── FilterBar.tsx
+│   │   ├── NotificationCard.tsx
+│   │   ├── PaginationControls.tsx
+│   │   ├── LoadingSkeleton.tsx
+│   │   ├── EmptyState.tsx
+│   │   └── ErrorState.tsx
+│   ├── pages/               # Next.js pages
+│   │   ├── _app.tsx         # App wrapper with theme
+│   │   └── index.tsx        # Main dashboard
+│   ├── context/             # State management
+│   │   └── notificationStore.ts
+│   ├── services/            # API services
+│   │   └── api.service.ts
+│   ├── types/               # TypeScript types
+│   │   └── notification.types.ts
+│   └── styles/              # Global styles
+├── public/                  # Static assets
+├── package.json
+├── tsconfig.json
+├── next.config.js
+└── README.md
 ```
 
-**Response:**
-```json
-{
-  "success": true,
-  "data": {
-    "notifications": [...],
-    "pagination": {
-      "currentPage": 1,
-      "totalPages": 5,
-      "totalItems": 50,
-      "itemsPerPage": 10
-    }
-  }
-}
-```
+## Installation
 
-### Get Priority Notifications
-```http
-GET /api/notifications/priority?limit=5
-```
-
-### Search Notifications
-```http
-GET /api/notifications/search?q=placement
-```
-
-### Mark as Read
-```http
-PATCH /api/notifications/:id/read
-```
-
-## 🏗️ Architecture Highlights
-
-### Backend Architecture
-```
-Request → Logging Middleware → Routes → Controller → Service → Response
-```
-
-### Frontend Architecture
-```
-Component → Zustand Store → API Service → Backend API
-```
-
-### State Management
-- Global state with Zustand
-- Async actions for API calls
-- Optimistic UI updates
-- Error boundary handling
-
-## 🧪 Testing the Application
-
-### Test Backend API
 ```bash
-# Health check
-curl http://localhost:5000/health
-
-# Get notifications
-curl http://localhost:5000/api/notifications
-
-# Get priority notifications
-curl http://localhost:5000/api/notifications/priority?limit=5
+cd notification_app_fe
+npm install
 ```
 
-### Test Frontend
-1. Open `http://localhost:3000`
-2. Try filtering by type
-3. Search for notifications
-4. Toggle dark/light mode
-5. Navigate through pages
-6. Mark notifications as read
+## Environment Variables
 
-## 📝 Code Quality
+Create a `.env.local` file:
 
-### TypeScript
-- Strict mode enabled
-- Full type coverage
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000/api
+```
+
+## Running the Application
+
+### Development Mode
+```bash
+npm run dev
+```
+
+The app will start on `http://localhost:3000`
+
+### Production Build
+```bash
+npm run build
+npm start
+```
+
+## Features Overview
+
+### 1. Priority Notifications
+- Displays top N priority notifications
+- Configurable limit (3, 5, or 10)
+- Sorted by priority score
+- Highlighted section at the top
+
+### 2. Notification Filtering
+- Filter by type (Placement, Result, Event, All)
+- Show unread only toggle
+- Real-time filtering
+
+### 3. Search
+- Search notifications by message content
+- Instant search results
+- Clear search button
+
+### 4. Pagination
+- Navigate through pages
+- Shows current page info
+- First/Last page buttons
+- Smooth scroll to top
+
+### 5. Dark/Light Mode
+- Toggle between themes
+- Persistent across sessions
+- Material UI theme integration
+
+### 6. Responsive Design
+- Mobile-first approach
+- Tablet and desktop optimized
+- Flexible layouts
+- Touch-friendly UI
+
+### 7. Loading States
+- Skeleton loaders
+- Smooth transitions
+- Loading indicators
+
+### 8. Error Handling
+- User-friendly error messages
+- Retry functionality
+- Network error detection
+
+### 9. Empty States
+- Clear messaging
+- Action buttons
+- Helpful illustrations
+
+## Component Documentation
+
+### Navbar
+Top navigation bar with:
+- App title
+- Unread notification badge
+- Theme toggle button
+
+### FilterBar
+Filtering controls with:
+- Search input
+- Type dropdown
+- Unread only switch
+
+### NotificationCard
+Individual notification display:
+- Type badge with color coding
+- Timestamp (relative)
+- Message content
+- Read/Unread indicator
+- Mark as read button
+- Hover effects
+
+### PaginationControls
+Pagination UI:
+- Page numbers
+- First/Last buttons
+- Current page info
+- Items count
+
+### LoadingSkeleton
+Loading placeholder:
+- Animated skeletons
+- Matches card layout
+- Multiple items
+
+### EmptyState
+No data display:
+- Icon
+- Message
+- Clear filters button
+
+### ErrorState
+Error display:
+- Error message
+- Retry button
+- Alert styling
+
+## State Management
+
+Using Zustand for global state:
+
+```typescript
+// Access store
+const { notifications, loading, error } = useNotificationStore();
+
+// Actions
+fetchNotifications();
+setFilter('type', 'Placement');
+markAsRead(notificationId);
+```
+
+## API Integration
+
+All API calls are handled through `api.service.ts`:
+
+```typescript
+// Fetch notifications
+await apiService.getNotifications(page, limit, type);
+
+// Get priority notifications
+await apiService.getPriorityNotifications(limit);
+
+// Mark as read
+await apiService.markAsRead(id);
+
+// Search
+await apiService.searchNotifications(query);
+```
+
+## Styling
+
+Material UI theming:
+
+```typescript
+const theme = createTheme({
+  palette: {
+    mode: isDarkMode ? 'dark' : 'light',
+    primary: { main: '#1976d2' },
+    secondary: { main: '#dc004e' },
+  },
+});
+```
+
+## Type Safety
+
+Full TypeScript coverage:
 - Interface definitions
-- Type-safe API calls
+- Type checking
+- IntelliSense support
+- Compile-time error detection
 
-### Code Organization
-- Modular architecture
-- Separation of concerns
-- Reusable components
-- Clean code principles
+## Performance Optimizations
 
-### Comments
-- JSDoc documentation
-- Inline comments
-- Function descriptions
-- Type annotations
+- Code splitting with Next.js
+- Lazy loading components
+- Memoization where needed
+- Optimized re-renders
+- Efficient state updates
 
-## 🔒 Best Practices
+## Browser Support
 
-- ✅ Error handling at all levels
-- ✅ Input validation
-- ✅ CORS configuration
-- ✅ Environment variables
-- ✅ Logging and monitoring
-- ✅ Responsive design
-- ✅ Accessibility compliance
-- ✅ Performance optimization
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+- Mobile browsers
 
-## 🚧 Future Enhancements
+## Accessibility
 
-### Phase 1
-- [ ] Database integration (MongoDB/PostgreSQL)
-- [ ] User authentication (JWT)
-- [ ] WebSocket for real-time updates
-- [ ] Unit tests (Jest)
-- [ ] Integration tests
+- Semantic HTML
+- ARIA labels
+- Keyboard navigation
+- Screen reader support
+- Color contrast compliance
 
-### Phase 2
+## Future Enhancements
+
 - [ ] Push notifications
-- [ ] Email notifications
+- [ ] Notification grouping
+- [ ] Custom notification sounds
+- [ ] Export notifications
 - [ ] Notification preferences
-- [ ] Advanced analytics
-- [ ] Export functionality
+- [ ] Offline support (PWA)
+- [ ] Notification history
+- [ ] Advanced filters
 
-### Phase 3
-- [ ] Docker containerization
-- [ ] CI/CD pipeline
-- [ ] Kubernetes deployment
-- [ ] Redis caching
-- [ ] Rate limiting
+## Troubleshooting
 
-## 📄 Documentation
+### Port already in use
+```bash
+# Kill process on port 3000
+npx kill-port 3000
+```
 
-Each component has its own detailed README:
-- [Logging Middleware README](./logging_middleware/README.md)
-- [Backend README](./notification_app_be/README.md)
-- [Frontend README](./notification_app_fe/README.md)
-- [System Design Document](./notification_system_design.md)
-
-## 🐛 Troubleshooting
-
-### Backend won't start
-- Check if port 5000 is available
-- Verify Node.js version (v18+)
-- Run `npm install` again
-
-### Frontend won't start
-- Check if port 3000 is available
-- Ensure backend is running
-- Clear `.next` folder and rebuild
-
-### API connection errors
-- Verify backend is running on port 5000
+### API connection issues
+- Ensure backend is running on port 5000
 - Check CORS configuration
-- Inspect browser console for errors
+- Verify API URL in .env.local
 
-## 📊 Performance Metrics
+### Build errors
+```bash
+# Clear cache and reinstall
+rm -rf .next node_modules
+npm install
+npm run dev
+```
 
-- API Response Time: < 200ms
-- Frontend Load Time: < 2s
-- Lighthouse Score: 90+
-- Bundle Size: Optimized with Next.js
-
-## 🎓 Learning Outcomes
-
-This project demonstrates:
-- Full-stack TypeScript development
-- RESTful API design
-- React/Next.js best practices
-- State management patterns
-- Material UI implementation
-- System design thinking
-- Production-grade code quality
-
-## 📞 Support
-
-For issues or questions:
-1. Check component-specific READMEs
-2. Review system design document
-3. Inspect browser/server console logs
-
-## ⚖️ License
+## License
 
 MIT
-
----
-
-**Built with ❤️ for Campus Hiring Evaluation**
